@@ -19,7 +19,7 @@ void loggerInit(char* argv0) {
 int main(int argc, char* argv[]) {
     loggerInit(argv[0]);
 
-    FrameCapturer fc("192.168.50.81",80,"demo","demo");
+    FrameCapturer fc("192.168.50.84",80,"demo","demo");
     fc.setZoom(2000);
     FrameProcessor fp(fc);
 
