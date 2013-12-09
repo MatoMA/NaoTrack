@@ -73,6 +73,17 @@ OBJDIR_DATABASEGENERATOR = obj/DatabaseGenerator
 DEP_DATABASEGENERATOR = 
 OUT_DATABASEGENERATOR = bin/DatabaseGenerator/database_generator
 
+INC_SVMPREDICTORTEST = $(INC) -Ithird_party/local/include
+CFLAGS_SVMPREDICTORTEST = $(CFLAGS) -g -Wall -ansi -std=c++0x `pkg-config --cflags ml-libsvm`
+RESINC_SVMPREDICTORTEST = $(RESINC)
+RCFLAGS_SVMPREDICTORTEST = $(RCFLAGS)
+LIBDIR_SVMPREDICTORTEST = $(LIBDIR) -Lthird_party/local/lib
+LIB_SVMPREDICTORTEST = $(LIB)
+LDFLAGS_SVMPREDICTORTEST = $(LDFLAGS) -lglog `pkg-config --libs ml-libsvm`
+OBJDIR_SVMPREDICTORTEST = obj/SVMPredictorTest
+DEP_SVMPREDICTORTEST = 
+OUT_SVMPREDICTORTEST = bin/SVMPredictorTest/svm_predictor_test
+
 OBJ_DEBUG = $(OBJDIR_DEBUG)/src/Position/PositionServer/position-server.o
 
 OBJ_POSITIONSERVER = $(OBJDIR_POSITIONSERVER)/src/Position/PositionServer/position-server.o
@@ -83,9 +94,11 @@ OBJ_DETECTIONTEST = $(OBJDIR_DETECTIONTEST)/src/Detection/DetectionTest.o $(OBJD
 
 OBJ_DATABASEGENERATOR = $(OBJDIR_DATABASEGENERATOR)/src/Detection/DatabaseGenerator.o $(OBJDIR_DATABASEGENERATOR)/src/Detection/FrameCapturer.o $(OBJDIR_DATABASEGENERATOR)/src/Detection/FrameProcessor.o
 
-all: debug positionserver fakesource detectiontest databasegenerator
+OBJ_SVMPREDICTORTEST = $(OBJDIR_SVMPREDICTORTEST)/src/Detection/SVMPredictor.o $(OBJDIR_SVMPREDICTORTEST)/src/Detection/SVMPredictorTest.o
 
-clean: clean_debug clean_positionserver clean_fakesource clean_detectiontest clean_databasegenerator
+all: debug positionserver fakesource detectiontest databasegenerator svmpredictortest
+
+clean: clean_debug clean_positionserver clean_fakesource clean_detectiontest clean_databasegenerator clean_svmpredictortest
 
 before_debug: 
 	test -d bin/Debug || mkdir -p bin/Debug
@@ -194,5 +207,27 @@ clean_databasegenerator:
 	rm -rf bin/DatabaseGenerator
 	rm -rf $(OBJDIR_DATABASEGENERATOR)/src/Detection
 
-.PHONY: before_debug after_debug clean_debug before_positionserver after_positionserver clean_positionserver before_fakesource after_fakesource clean_fakesource before_detectiontest after_detectiontest clean_detectiontest before_databasegenerator after_databasegenerator clean_databasegenerator
+before_svmpredictortest: 
+	test -d bin/SVMPredictorTest || mkdir -p bin/SVMPredictorTest
+	test -d $(OBJDIR_SVMPREDICTORTEST)/src/Detection || mkdir -p $(OBJDIR_SVMPREDICTORTEST)/src/Detection
+
+after_svmpredictortest: 
+
+svmpredictortest: before_svmpredictortest out_svmpredictortest after_svmpredictortest
+
+out_svmpredictortest: before_svmpredictortest $(OBJ_SVMPREDICTORTEST) $(DEP_SVMPREDICTORTEST)
+	$(LD) $(LIBDIR_SVMPREDICTORTEST) -o $(OUT_SVMPREDICTORTEST) $(OBJ_SVMPREDICTORTEST)  $(LDFLAGS_SVMPREDICTORTEST) $(LIB_SVMPREDICTORTEST)
+
+$(OBJDIR_SVMPREDICTORTEST)/src/Detection/SVMPredictor.o: src/Detection/SVMPredictor.cpp
+	$(CXX) $(CFLAGS_SVMPREDICTORTEST) $(INC_SVMPREDICTORTEST) -c src/Detection/SVMPredictor.cpp -o $(OBJDIR_SVMPREDICTORTEST)/src/Detection/SVMPredictor.o
+
+$(OBJDIR_SVMPREDICTORTEST)/src/Detection/SVMPredictorTest.o: src/Detection/SVMPredictorTest.cpp
+	$(CXX) $(CFLAGS_SVMPREDICTORTEST) $(INC_SVMPREDICTORTEST) -c src/Detection/SVMPredictorTest.cpp -o $(OBJDIR_SVMPREDICTORTEST)/src/Detection/SVMPredictorTest.o
+
+clean_svmpredictortest: 
+	rm -f $(OBJ_SVMPREDICTORTEST) $(OUT_SVMPREDICTORTEST)
+	rm -rf bin/SVMPredictorTest
+	rm -rf $(OBJDIR_SVMPREDICTORTEST)/src/Detection
+
+.PHONY: before_debug after_debug clean_debug before_positionserver after_positionserver clean_positionserver before_fakesource after_fakesource clean_fakesource before_detectiontest after_detectiontest clean_detectiontest before_databasegenerator after_databasegenerator clean_databasegenerator before_svmpredictortest after_svmpredictortest clean_svmpredictortest
 

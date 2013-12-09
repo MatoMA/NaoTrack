@@ -344,3 +344,186 @@
 	"FrameCapturer.h"
 	"FrameProcessor.h"
 
+1386586317 source:/home/mato/workspace/NaoTrack/src/Detection/SVMPredictorTest.cpp
+	<iostream>
+	"SVMPredictor.h"
+
+1386555497 /home/mato/workspace/NaoTrack/third_party/local/include/glog/logging.h
+	<errno.h>
+	<string.h>
+	<time.h>
+	<iosfwd>
+	<ostream>
+	<sstream>
+	<string>
+	<unistd.h>
+	<vector>
+	<stdint.h>
+	<sys/types.h>
+	<inttypes.h>
+	<gflags/gflags.h>
+	"glog/log_severity.h"
+	"glog/vlog_is_on.h"
+
+1386555497 /home/mato/workspace/NaoTrack/third_party/local/include/glog/log_severity.h
+
+1386555497 /home/mato/workspace/NaoTrack/third_party/local/include/glog/vlog_is_on.h
+	"glog/log_severity.h"
+
+1386585780 /home/mato/workspace/NaoTrack/src/Detection/SVMPredictor.h
+	<string>
+	<utility>
+	<ml-libsvm.hpp>
+
+1386584486 /usr/local/include/ml-libsvm/ml-libsvm.hpp
+	<ml.hpp>
+	<libsvm/svm.h>
+	<vector>
+	<memory>
+
+1380124687 /usr/local/include/ml/ml.hpp
+	<mlAlgorithms.hpp>
+	<mlBootstrap.hpp>
+	<mlCache.hpp>
+	<mlConfusion.hpp>
+	<mlDimensions.hpp>
+	<mlException.hpp>
+	<mlFilters.hpp>
+	<mlGnuplot.hpp>
+	<mlLoss.hpp>
+	<mlMap.hpp>
+	<mlMerge.hpp>
+	<mlOperators.hpp>
+	<mlPartition.hpp>
+	<mlSearch.hpp>
+	<mlVariableSelection.hpp>
+	<mlShuffle.hpp>
+	<mlStreamer.hpp>
+	<mlStreamBuffer.hpp>
+	<mlWrapper.hpp>
+
+1380124687 /usr/local/include/ml/mlAlgorithms.hpp
+	<iostream>
+	<string>
+	<vector>
+	<list>
+	<array>
+	<tuple>
+	<stdexcept>
+	<iterator>
+	<utility>
+	<cstdlib>
+	<mlMerge.hpp>
+	<mlOperators.hpp>
+	<mlPartition.hpp>
+	<iostream>
+	<iomanip>
+
+1380124687 /usr/local/include/ml/mlMerge.hpp
+	<exception>
+	<iterator>
+
+1380124687 /usr/local/include/ml/mlOperators.hpp
+	<iterator>
+	<utility>
+	<iostream>
+
+1380124687 /usr/local/include/ml/mlPartition.hpp
+	<mlMerge.hpp>
+
+1380124687 /usr/local/include/ml/mlBootstrap.hpp
+	<vector>
+	<set>
+	<sstream>
+	<iterator>
+	<cstdlib>
+	<mlAlgorithms.hpp>
+	<mlException.hpp>
+	<iostream>
+	<iomanip>
+
+1380124687 /usr/local/include/ml/mlException.hpp
+	<string>
+	<sstream>
+	<exception>
+
+1380124687 /usr/local/include/ml/mlCache.hpp
+	<vector>
+	<iterator>
+	<algorithm>
+
+1380124687 /usr/local/include/ml/mlConfusion.hpp
+	<map>
+	<set>
+	<utility>
+	<mlException.hpp>
+
+1380124687 /usr/local/include/ml/mlDimensions.hpp
+	<iterator>
+	<algorithm>
+	<cstddef>
+
+1380124687 /usr/local/include/ml/mlFilters.hpp
+	"mlDimensions.hpp"
+	<vector>
+	<algorithm>
+	<limits>
+	<iterator>
+
+1380124687 /usr/local/include/ml/mlGnuplot.hpp
+	<fstream>
+	<string>
+	<mlException.hpp>
+
+1380124687 /usr/local/include/ml/mlLoss.hpp
+
+1380124687 /usr/local/include/ml/mlMap.hpp
+	<iterator>
+	<mlInternals.hpp>
+
+1380124687 /usr/local/include/ml/mlInternals.hpp
+
+1380124687 /usr/local/include/ml/mlSearch.hpp
+	<algorithm>
+	<limits>
+	<map>
+
+1380124687 /usr/local/include/ml/mlVariableSelection.hpp
+	"mlDimensions.hpp"
+	<vector>
+	<algorithm>
+	<limits>
+	<iterator>
+
+1380124687 /usr/local/include/ml/mlShuffle.hpp
+	<vector>
+	<iterator>
+	<algorithm>
+
+1380124687 /usr/local/include/ml/mlStreamer.hpp
+	<iostream>
+	<string>
+	<vector>
+	<list>
+	<array>
+	<tuple>
+	<stdexcept>
+	<iterator>
+	<utility>
+
+1380124687 /usr/local/include/ml/mlStreamBuffer.hpp
+	<iostream>
+	<vector>
+
+1380124687 /usr/local/include/ml/mlWrapper.hpp
+	"mlDimensions.hpp"
+	<vector>
+	<algorithm>
+	<limits>
+	<iterator>
+	<utility>
+
+1386586294 source:/home/mato/workspace/NaoTrack/src/Detection/SVMPredictor.cpp
+	<glog/logging.h>
+	"SVMPredictor.h"
+
