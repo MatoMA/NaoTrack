@@ -1,7 +1,7 @@
 #!/bin/sh
 if [ ! -d third_party/local ]
 then
-    mkdir third_party/local
+    mkdir -p third_party/local
 fi
 
 cd third_party/local
