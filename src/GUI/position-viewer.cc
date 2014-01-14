@@ -56,31 +56,37 @@ static void draw_point(cairo_t *cr, const Point& p){
 }
 
 static void draw_point_cloud(cairo_t *cr){
-	std::string socket_get = "get\n";
-	if(isConnected){
-		socket_ptr->write_some(boost::asio::buffer(socket_get.c_str(),socket_get.size()));
-		size_t len_avail = socket_ptr->available(); // available buffer size
-        std::vector<char> data(socket_ptr->available());
-        boost::asio::read(*socket_ptr, boost::asio::buffer(data));
-        std::istringstream is(std::string(data.begin(),data.end()));
-		std::string strLine;
-		std::getline(is, strLine);
-		int numOfPoints = atoi(strLine.c_str()); // number of points
-		// Read points
-		Point p;
-		boost::char_separator<char> delimiter(" ");
-		for (int i = 0; i < numOfPoints; ++i) {
+	try {
+		std::string socket_get = "get\n";
+		if (isConnected) {
+			socket_ptr->write_some(
+					boost::asio::buffer(socket_get.c_str(), socket_get.size()));
+			size_t len_avail = socket_ptr->available(); // available buffer size
+			std::vector<char> data(socket_ptr->available());
+			boost::asio::read(*socket_ptr, boost::asio::buffer(data));
+			std::istringstream is(std::string(data.begin(), data.end()));
+			std::string strLine;
 			std::getline(is, strLine);
-			// Parse the string line
-			boost::tokenizer<boost::char_separator<char>> tok(strLine, delimiter);
-			auto t = tok.begin();
-			p.label = boost::lexical_cast<int>(*t);
-			t++;
-			p.x = boost::lexical_cast<double>(*t);
-			t++;
-			p.y = boost::lexical_cast<double>(*t);
-			draw_point(cr, p); // draw point
+			int numOfPoints = atoi(strLine.c_str()); // number of points
+			// Read points
+			Point p;
+			boost::char_separator<char> delimiter(" ");
+			for (int i = 0; i < numOfPoints; ++i) {
+				std::getline(is, strLine);
+				// Parse the string line
+				boost::tokenizer<boost::char_separator<char>> tok(strLine,
+						delimiter);
+				auto t = tok.begin();
+				p.label = boost::lexical_cast<int>(*t);
+				t++;
+				p.x = boost::lexical_cast<double>(*t);
+				t++;
+				p.y = boost::lexical_cast<double>(*t);
+				draw_point(cr, p); // draw point
+			}
 		}
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
 	}
 }
 
