@@ -92,7 +92,7 @@
 				<Option output="bin/SVMPredictorTest/svm_predictor_test" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin/SVMPredictorTest/" />
 				<Option object_output="obj/SVMPredictorTest/" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g -Wall -ansi -std=c++0x `pkg-config --cflags ml-libsvm`" />
@@ -101,6 +101,27 @@
 				<Linker>
 					<Add option="-lglog" />
 					<Add option="`pkg-config --libs ml-libsvm`" />
+					<Add directory="third_party/local/lib" />
+				</Linker>
+			</Target>
+			<Target title="Detector">
+				<Option output="bin/Detector/detector" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Detector/" />
+				<Option object_output="obj/Detector/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-g -Wall -ansi -std=c++0x `pkg-config --cflags mirage axisPTZ ml-libsvm`" />
+					<Add directory="third_party/local/include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-lpthread" />
+					<Add option="-lboost_system-mt" />
+					<Add option="-lboost_filesystem" />
+					<Add option="-lglog" />
+					<Add option="`pkg-config --libs mirage axisPTZ ml-libsvm`" />
 					<Add directory="third_party/local/lib" />
 				</Linker>
 			</Target>
@@ -115,9 +136,13 @@
 		<Unit filename="src/Detection/DetectionTest.cpp">
 			<Option target="DetectionTest" />
 		</Unit>
+		<Unit filename="src/Detection/Detector.cpp">
+			<Option target="Detector" />
+		</Unit>
 		<Unit filename="src/Detection/FrameCapturer.cpp">
 			<Option target="DetectionTest" />
 			<Option target="DatabaseGenerator" />
+			<Option target="Detector" />
 		</Unit>
 		<Unit filename="src/Detection/FrameCapturer.h">
 			<Option target="DetectionTest" />
@@ -126,6 +151,7 @@
 		<Unit filename="src/Detection/FrameProcessor.cpp">
 			<Option target="DetectionTest" />
 			<Option target="DatabaseGenerator" />
+			<Option target="Detector" />
 		</Unit>
 		<Unit filename="src/Detection/FrameProcessor.h">
 			<Option target="DetectionTest" />
@@ -133,6 +159,7 @@
 		</Unit>
 		<Unit filename="src/Detection/SVMPredictor.cpp">
 			<Option target="SVMPredictorTest" />
+			<Option target="Detector" />
 		</Unit>
 		<Unit filename="src/Detection/SVMPredictor.h">
 			<Option target="&lt;{~None~}&gt;" />

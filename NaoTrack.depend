@@ -48,36 +48,36 @@
 1383528826 /home/mato/Cours/NaoTrack/third_party/local/include/glog/vlog_is_on.h
 	"glog/log_severity.h"
 
-1383420919 /usr/local/include/axisPTZ-1.0/axisPTZ.h
+1386554640 /usr/local/include/axisPTZ-1.0/axisPTZ.h
 	<PTZ.h>
 
-1383420919 /usr/local/include/axisPTZ-1.0/PTZ.h
+1386554640 /usr/local/include/axisPTZ-1.0/PTZ.h
 	<map>
 	<cc++/socket.h>
 	<cc++/url.h>
 	<jpeg-c++.h>
 	<string>
 
-1382467657 /usr/local/include/jpeg-c++-1.0/jpeg-c++.h
+1386554597 /usr/local/include/jpeg-c++-1.0/jpeg-c++.h
 	<jpegStream.h>
 	<jpegDecompress.h>
 	<jpegCompress.h>
 	<jpegException.h>
 
-1382467657 /usr/local/include/jpeg-c++-1.0/jpegStream.h
+1386554597 /usr/local/include/jpeg-c++-1.0/jpegStream.h
 	<iostream>
 
-1382467657 /usr/local/include/jpeg-c++-1.0/jpegDecompress.h
+1386554597 /usr/local/include/jpeg-c++-1.0/jpegDecompress.h
 	<iostream>
 	<cstdlib>
 	<jpegStream.h>
 	<jpegException.h>
 	<jpeglib.h>
 
-1382467657 /usr/local/include/jpeg-c++-1.0/jpegException.h
+1386554597 /usr/local/include/jpeg-c++-1.0/jpegException.h
 	<string>
 
-1382467657 /usr/local/include/jpeg-c++-1.0/jpegCompress.h
+1386554597 /usr/local/include/jpeg-c++-1.0/jpegCompress.h
 	<iostream>
 	<cstdlib>
 	<jpegStream.h>
@@ -93,7 +93,7 @@
 	"FrameCapturer.h"
 	"FrameProcessor.h"
 
-1382467701 /usr/local/include/mirage-1.0/mirage.h
+1386554976 /usr/local/include/mirage-1.0/mirage.h
 	<mirageAlgo.h>
 	<mirageImage.h>
 	<mirageMemory.h>
@@ -107,30 +107,30 @@
 	<mirageStatic.h>
 	<mirageFFT.h>
 
-1382467701 /usr/local/include/mirage-1.0/mirageAlgo.h
+1386554976 /usr/local/include/mirage-1.0/mirageAlgo.h
 	<iostream>
 	<math.h>
 	<mirageImage.h>
 
-1382467701 /usr/local/include/mirage-1.0/mirageImage.h
+1386554976 /usr/local/include/mirage-1.0/mirageImage.h
 	<mirageMemory.h>
 	<math.h>
 	<mirageException.h>
 
-1382467701 /usr/local/include/mirage-1.0/mirageMemory.h
+1386554976 /usr/local/include/mirage-1.0/mirageMemory.h
 	<cstddef>
 	<cstring>
 	<iostream>
 
-1382467701 /usr/local/include/mirage-1.0/mirageException.h
+1386554976 /usr/local/include/mirage-1.0/mirageException.h
 	<sstream>
 
-1382467701 /usr/local/include/mirage-1.0/mirageRequirements.h
+1386554976 /usr/local/include/mirage-1.0/mirageRequirements.h
 	<mirageMemory.h>
 	<mirageImage.h>
 	<mirage.h>
 
-1382467701 /usr/local/include/mirage-1.0/mirageImg.h
+1386554976 /usr/local/include/mirage-1.0/mirageImg.h
 	<mirageImage.h>
 	<mirageColorSpace.h>
 	<mirageException.h>
@@ -142,27 +142,27 @@
 	<list>
 	<math.h>
 
-1382467701 /usr/local/include/mirage-1.0/mirageColorSpace.h
+1386554976 /usr/local/include/mirage-1.0/mirageColorSpace.h
 	<math.h>
 	<mirageAlgo.h>
 
-1382467701 /usr/local/include/mirage-1.0/mirageStatic.h
+1386554976 /usr/local/include/mirage-1.0/mirageStatic.h
 
-1382467701 /usr/local/include/mirage-1.0/mirageTime.h
+1386554976 /usr/local/include/mirage-1.0/mirageTime.h
 	<time.h>
 	<sys/time.h>
 
-1382467701 /usr/local/include/mirage-1.0/mirageMorph.h
+1386554976 /usr/local/include/mirage-1.0/mirageMorph.h
 	<mirageImg.h>
 	<math.h>
 
-1382467701 /usr/local/include/mirage-1.0/mirageLabel.h
+1386554976 /usr/local/include/mirage-1.0/mirageLabel.h
 	<mirageException.h>
 	<vector>
 	<list>
 	<string>
 
-1382467701 /usr/local/include/mirage-1.0/mirageFFT.h
+1386554976 /usr/local/include/mirage-1.0/mirageFFT.h
 	<map>
 	<iostream>
 	<iomanip>
@@ -344,7 +344,7 @@
 	"FrameCapturer.h"
 	"FrameProcessor.h"
 
-1386586317 source:/home/mato/workspace/NaoTrack/src/Detection/SVMPredictorTest.cpp
+1389690845 source:/home/mato/workspace/NaoTrack/src/Detection/SVMPredictorTest.cpp
 	<iostream>
 	"SVMPredictor.h"
 
@@ -370,12 +370,12 @@
 1386555497 /home/mato/workspace/NaoTrack/third_party/local/include/glog/vlog_is_on.h
 	"glog/log_severity.h"
 
-1386585780 /home/mato/workspace/NaoTrack/src/Detection/SVMPredictor.h
+1386597042 /home/mato/workspace/NaoTrack/src/Detection/SVMPredictor.h
 	<string>
 	<utility>
 	<ml-libsvm.hpp>
 
-1386584486 /usr/local/include/ml-libsvm/ml-libsvm.hpp
+1386598982 /usr/local/include/ml-libsvm/ml-libsvm.hpp
 	<ml.hpp>
 	<libsvm/svm.h>
 	<vector>
@@ -523,7 +523,42 @@
 	<iterator>
 	<utility>
 
-1386586294 source:/home/mato/workspace/NaoTrack/src/Detection/SVMPredictor.cpp
+1386597164 source:/home/mato/workspace/NaoTrack/src/Detection/SVMPredictor.cpp
 	<glog/logging.h>
 	"SVMPredictor.h"
+
+1386552561 source:/home/mato/workspace/NaoTrack/src/Detection/FrameCapturer.cpp
+	<glog/logging.h>
+	"FrameCapturer.h"
+
+1386552561 /home/mato/workspace/NaoTrack/src/Detection/FrameCapturer.h
+	<string>
+	<axisPTZ.h>
+	<mirage.h>
+
+1386552561 source:/home/mato/workspace/NaoTrack/src/Detection/FrameProcessor.cpp
+	<math.h>
+	<glog/logging.h>
+	"FrameCapturer.h"
+	"FrameProcessor.h"
+
+1386552561 /home/mato/workspace/NaoTrack/src/Detection/FrameProcessor.h
+	<string>
+	<vector>
+
+1389691994 source:/home/mato/workspace/NaoTrack/src/Detection/Detector.cpp
+	<iostream>
+	"SVMPredictor.h"
+
+1386552561 source:/home/mato/workspace/NaoTrack/src/Position/PositionServer/position-server.cc
+	<string>
+	<iostream>
+	<cstdlib>
+	<map>
+	<utility>
+	<chrono>
+	<thread>
+	<mutex>
+	<memory>
+	<boost/asio.hpp>
 
