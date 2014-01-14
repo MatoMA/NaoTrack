@@ -1,5 +1,5 @@
 CFLAGS=-c -std=c++0x -g
-LDFLAGS=-lpthread -lboost_thread-mt -lboost_system-mt
+LDFLAGS=-lpthread -lboost_thread -lboost_system
 
 all: fakesource
 
