@@ -4,8 +4,8 @@
 	<File name="src/Detection/DetectionTest.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="895" topLine="0" />
 	</File>
-	<File name="src/Detection/Detector.cpp" open="1" top="1" tabpos="0">
-		<Cursor position="98" topLine="0" />
+	<File name="src/Detection/Detector.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="1263" topLine="16" />
 	</File>
 	<File name="src/Detection/FrameCapturer.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="0" topLine="0" />
@@ -16,13 +16,16 @@
 	<File name="src/Detection/FrameProcessor.h" open="0" top="0" tabpos="3">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="src/Detection/SVMPredictor.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="765" topLine="8" />
+	<File name="src/Detection/SVMPredictor.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="580" topLine="0" />
 	</File>
 	<File name="src/Detection/SVMPredictor.h" open="0" top="0" tabpos="3">
 		<Cursor position="108" topLine="0" />
 	</File>
-	<File name="src/Detection/SVMPredictorTest.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="193" topLine="0" />
+	<File name="src/Detection/SVMPredictorTest.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="src/Position/Fakesource/fakesource.cpp" open="1" top="1" tabpos="4">
+		<Cursor position="422" topLine="17" />
 	</File>
 </CodeBlocks_layout_file>

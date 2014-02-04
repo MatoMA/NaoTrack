@@ -24,9 +24,11 @@ void updatePoints(std::shared_ptr<boost::asio::ip::tcp::iostream> socket,
     while(1) {
         for (auto &data : datas) {
             *socket << "put ";
-            *socket << data.first;
+            //*socket << data.first;
+            *socket << 1;
             *socket << " ";
-            auto point = data.second;
+            //auto point = data.second;
+            Point point(2, 2);
             *socket << point.first + fRand(-noiseLevel, noiseLevel);
             *socket << " ";
             *socket << point.second + fRand(-noiseLevel, noiseLevel);

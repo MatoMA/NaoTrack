@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
     //std::string user("frezza");
     //std::string password("gloubi");
 
-    FrameCapturer fc("192.168.50.84",80,"demo","demo");
+    FrameCapturer fc("192.168.50.81",80,"demo","demo");
 
     fc.setZoom(0);
 
@@ -27,20 +27,20 @@ int main(int argc, char* argv[]) {
     std::cout << "Tilt: " << tilt << std::endl;
     std::cout << "Zoom: " << zoom << std::endl;
 
-    //fc.setZoom(2000);
-    //FrameProcessor fp(fc);
-    //fp.nextFrame();
+    fc.setZoom(2000);
+    FrameProcessor fp(fc);
+    fp.nextFrame();
     //fp.writeFrame("output1.jpg");
-    //fp.filterColor(35);
+    fp.filterColor(35);
     //fp.writeFrame("output2.jpg");
-    //std::vector<std::pair<double, double>> pt;
-    //pt = fp.findPositions();
+    std::vector<std::pair<double, double>> pt;
+    pt = fp.findPositions();
     //fc.setPanTilt(pt[0].first, pt[0].second);
-    //for (auto i : pt) {
-        //std::cout << "haha" << std::endl;
-        //std::cout << i.first << std::endl;
-        //std::cout << i.second << std::endl;
-    //}
+    for (auto i : pt) {
+        std::cout << "haha" << std::endl;
+        std::cout << i.first << std::endl;
+        std::cout << i.second << std::endl;
+    }
 
     //fp.nextFakeFrame("fakeFrame2.jpg");
     //fp.filterColor(40);

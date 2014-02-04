@@ -370,7 +370,7 @@
 1386555497 /home/mato/workspace/NaoTrack/third_party/local/include/glog/vlog_is_on.h
 	"glog/log_severity.h"
 
-1386597042 /home/mato/workspace/NaoTrack/src/Detection/SVMPredictor.h
+1389695868 /home/mato/workspace/NaoTrack/src/Detection/SVMPredictor.h
 	<string>
 	<utility>
 	<ml-libsvm.hpp>
@@ -523,7 +523,7 @@
 	<iterator>
 	<utility>
 
-1386597164 source:/home/mato/workspace/NaoTrack/src/Detection/SVMPredictor.cpp
+1389695868 source:/home/mato/workspace/NaoTrack/src/Detection/SVMPredictor.cpp
 	<glog/logging.h>
 	"SVMPredictor.h"
 
@@ -546,8 +546,15 @@
 	<string>
 	<vector>
 
-1389691994 source:/home/mato/workspace/NaoTrack/src/Detection/Detector.cpp
+1391507247 source:/home/mato/workspace/NaoTrack/src/Detection/Detector.cpp
+	<string>
 	<iostream>
+	<glog/logging.h>
+	<ctime>
+	<boost/asio.hpp>
+	<boost/thread.hpp>
+	"FrameCapturer.h"
+	"FrameProcessor.h"
 	"SVMPredictor.h"
 
 1386552561 source:/home/mato/workspace/NaoTrack/src/Position/PositionServer/position-server.cc
@@ -561,4 +568,10 @@
 	<mutex>
 	<memory>
 	<boost/asio.hpp>
+
+1391504121 source:/home/mato/workspace/NaoTrack/src/Detection/DetectionTest.cpp
+	<string>
+	<glog/logging.h>
+	"FrameCapturer.h"
+	"FrameProcessor.h"
 
