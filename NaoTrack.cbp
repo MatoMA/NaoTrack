@@ -111,13 +111,21 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+<<<<<<< HEAD
 					<Add option="-O2" />
+=======
+>>>>>>> temp
 					<Add option="-g -Wall -ansi -std=c++0x `pkg-config --cflags mirage axisPTZ ml-libsvm`" />
 					<Add directory="third_party/local/include" />
 				</Compiler>
 				<Linker>
+<<<<<<< HEAD
 					<Add option="-s" />
 					<Add option="-lpthread" />
+=======
+					<Add option="-lpthread" />
+					<Add option="-lboost_thread-mt" />
+>>>>>>> temp
 					<Add option="-lboost_system-mt" />
 					<Add option="-lboost_filesystem" />
 					<Add option="-lglog" />
