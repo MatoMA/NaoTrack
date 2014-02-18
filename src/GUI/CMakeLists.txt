@@ -22,3 +22,8 @@ add_executable(position_viewer position-viewer.cc)
 
 # Link the target to the GTK+ libraries
 target_link_libraries(position_viewer ${GTK3_LIBRARIES} ${Boost_LIBRARIES} pthread)
+
+# CloudReader
+include_directories(include)
+add_executable(Analyser Analyser.cpp Point.hpp)
+target_link_libraries(Analyser ${Boost_LIBRARIES} pthread)

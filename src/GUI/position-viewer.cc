@@ -9,33 +9,29 @@ g++ -o position-viewer position-viewer.cc -Wl,--export-dynamic `pkg-config --cfl
 #include <iostream>
 #include <cmath>
 #include <time.h>
-#include <boost/asio.hpp>
-#include <boost/tokenizer.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
+#include "Point.hpp"
+#include "PointReader.hpp"
 
-typedef boost::asio::ip::tcp tcp;
-
+// config filename
 static const std::string CONF_FILENAME = "config.xml"; // Configuration filename
 
+// configurable values
 static float cell_size_h; // size of tiles in horizontal
 static float cell_size_v;
 static int cell_num_h = 10; // number of tiles in horizontal
 static int cell_num_v = 10;
 static float color_coeff = 32.0; // color coefficient for labels
+
+// is connected to the server
 static bool isConnected = false;
 
-boost::asio::io_service io_service;
-boost::shared_ptr<boost::asio::ip::tcp::socket> socket_ptr;
+// Point reader
+PointReader pointReader;
 
-struct Point{
-	int label;
-	double x;
-	double y;
-};
-
+// timer handler
 static gboolean time_handler(GtkWidget *widget) {
 	if (gtk_widget_get_window(widget) == NULL)
 		return FALSE;
@@ -45,75 +41,30 @@ static gboolean time_handler(GtkWidget *widget) {
 	return TRUE;
 }
 
+// draw a point
 static void draw_point(cairo_t *cr, const Point& p){
 	double e = p.label * color_coeff / 255.0;
 	cairo_set_source_rgb(cr,
-			e,
-			1 - e,
-			e);
-	cairo_arc(cr, p.x * cell_size_v, p.y * cell_size_h, 1, 0, 2 * M_PI);
+			1-e,
+			0,
+			1-e);
+	// left handed
+//	cairo_arc(cr, p.x * cell_size_v, p.y * cell_size_h, 1, 0, 2 * M_PI);
+	// right handed
+	cairo_arc(cr, p.y * cell_size_h, p.x * cell_size_v, 4, 0, 2 * M_PI);
 	cairo_fill(cr);
 }
 
-static void draw_point_cloud(cairo_t *cr){
-	try {
-		std::string socket_get = "get\n";
-		if (isConnected) {
-			socket_ptr->write_some(
-					boost::asio::buffer(socket_get.c_str(), socket_get.size()));
-			size_t len_avail = socket_ptr->available(); // available buffer size
-			std::vector<char> data(socket_ptr->available());
-			boost::asio::read(*socket_ptr, boost::asio::buffer(data));
-			std::istringstream is(std::string(data.begin(), data.end()));
-			std::string strLine;
-			std::getline(is, strLine);
-			int numOfPoints = atoi(strLine.c_str()); // number of points
-			// Read points
-			Point p;
-			boost::char_separator<char> delimiter(" ");
-			for (int i = 0; i < numOfPoints; ++i) {
-				std::getline(is, strLine);
-				// Parse the string line
-				boost::tokenizer<boost::char_separator<char>> tok(strLine,
-						delimiter);
-				auto t = tok.begin();
-				p.label = boost::lexical_cast<int>(*t);
-				t++;
-				p.x = boost::lexical_cast<double>(*t);
-				t++;
-				p.y = boost::lexical_cast<double>(*t);
-				draw_point(cr, p); // draw point
-			}
-		}
-	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+// draw the point cloud
+static void draw_point_cloud(cairo_t *cr, const std::vector<Point>& pointCloud){
+	for(Point p: pointCloud){
+		draw_point(cr, p);
 	}
-}
-
-// Establish the connection on socket
-static bool socket_connect(std::string host, std::string port){
-	try {
-		boost::system::error_code error;
-		tcp::resolver resolver(io_service);
-		tcp::resolver::query query(host,port);
-		tcp::resolver::iterator endpoint_it = resolver.resolve(query);
-		// Establish socket connection
-		socket_ptr.reset(new tcp::socket(io_service));
-		socket_ptr->connect(*endpoint_it,error);
-		if(error)
-			std::cout<<error<<std::endl;
-	}catch(std::exception& e){
-		std::cout<<e.what()<<std::endl;
-		return false;
-	}
-	if(socket_ptr->is_open())
-		return true;
-	else
-		return false;
 }
 
 extern "C" {
 
+// on draw event handler
 gboolean on_draw(GtkWidget *widget, cairo_t *cr, gpointer data) {
 	// Get the actual size of the drawing area
 	GtkAllocation alloc;
@@ -122,36 +73,47 @@ gboolean on_draw(GtkWidget *widget, cairo_t *cr, gpointer data) {
 	cell_size_h = alloc.width / cell_num_h;
 	// Draw tiles
 	cairo_set_source_rgb(cr, 0.6, 0.6, 0.8);
-	for (int i = 0; i < 10; ++i)
-		for (int j = 0; j < 10; ++j) {
+	for (int i = 0; i < cell_num_h; ++i)
+		for (int j = 0; j < cell_num_v; ++j) {
 			cairo_rectangle(cr, i * cell_size_h, j * cell_size_v, cell_size_h,
 					cell_size_v);
 			cairo_stroke(cr);
 		}
-	draw_point_cloud(cr);
+
+	// draw the point cloud
+	draw_point_cloud(cr,std::move(pointReader.getPointCloud()));
 	return true;
 }
 
+// event handler when the user clicks in the drawing area
 gboolean on_button_press(GtkWidget *widget, GdkEvent *event,
 		gpointer user_data) {
-	std::cout << event->motion.x / cell_size_h << std::endl;
-	std::cout << event->motion.y / cell_size_v << std::endl;
+/*	left handed
+ *  std::cout << "x: "<< event->motion.x / cell_size_h << std::endl;
+	std::cout << "y: "<< event->motion.y / cell_size_v << std::endl;*/
+
+	// right handed
+	std::cout << "x: "<<event->motion.y / cell_size_v << std::endl;
+	std::cout << "y: "<<event->motion.x / cell_size_h << std::endl;
 	return true;
 }
 
+// event handler when the mouse moves in the drawing area
 gboolean on_motion_notify(GtkWidget *widget, GdkEvent *event,
 		gpointer user_data) {
 	GtkWidget* label_info = (GtkWidget*) g_object_get_data(G_OBJECT(widget),
 			"label_info");
 	// format the data
 	std::stringstream ss;
+	// right handed
 	ss << boost::format("x: %.2f y: %.2f")
-					% (event->motion.x / cell_size_h)
-					% (event->motion.y / cell_size_v);
+					% (event->motion.y / cell_size_v)
+					% (event->motion.x / cell_size_h);
 	gtk_label_set_text((GtkLabel*) label_info, ss.str().c_str());
 	return true;
 }
 
+// event handler for the connection switch
 void on_activate_connection(GtkSwitch* widget, gpointer user_data){
 	GtkLabel* label_conn_stat = GTK_LABEL(GTK_WIDGET(g_object_get_data(G_OBJECT(widget),"label_connection_status")));
 	GtkEntry* entry_host = GTK_ENTRY(GTK_WIDGET(g_object_get_data(G_OBJECT(widget),"entry_host")));
@@ -161,9 +123,9 @@ void on_activate_connection(GtkSwitch* widget, gpointer user_data){
 	std::string port(gtk_entry_get_text(entry_port));
 
 	gboolean switchOn = gtk_switch_get_active(widget);
-	if(!switchOn){
+	if(!switchOn){ // switch off
 		if(isConnected){
-			socket_ptr->close();
+			pointReader.close();
 			gtk_label_set_text(label_conn_stat,"Disconnected");
 		}else // connection failure
 		{
@@ -173,8 +135,8 @@ void on_activate_connection(GtkSwitch* widget, gpointer user_data){
 		gtk_editable_set_editable(GTK_EDITABLE(entry_host),TRUE);
 		gtk_editable_set_editable(GTK_EDITABLE(entry_port),TRUE);
 		isConnected = false;
-	}else{
-		isConnected = socket_connect(host,port);
+	}else{ // switch on
+		isConnected = pointReader.connect(host, port);
 		if(!isConnected){
 			gtk_switch_set_active(widget, FALSE);
 		}else{
@@ -225,6 +187,7 @@ int main(int argc, char* argv[]) {
 		color_coeff = pt.get<float>("config.color_coefficient");
 	}catch(boost::property_tree::xml_parser::xml_parser_error& e){
 		std::cout << e.what() << std::endl;
+		// prompt the error when failed to read the config file
 		GtkWidget * dialog;
 		dialog = gtk_message_dialog_new(GTK_WINDOW(window),
 	            GTK_DIALOG_DESTROY_WITH_PARENT,
