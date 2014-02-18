@@ -10,7 +10,7 @@
 #include <boost/lexical_cast.hpp>
 #include "Point.hpp"
 
-class PointReader{
+class PointReader {
 	typedef boost::asio::ip::tcp tcp;
 
 private:
@@ -21,15 +21,16 @@ private:
 	bool isConnected;
 
 public:
-	PointReader():isConnected(false){
+	PointReader() :
+			isConnected(false) {
 
 	}
 
-	virtual ~PointReader(){
+	virtual ~PointReader() {
 
 	}
 
-	bool isConnetected(){
+	bool isConnetected() {
 		return isConnected;
 	}
 
@@ -58,35 +59,37 @@ public:
 	}
 
 	// close the connection
-	void close(){
+	void close() {
 		socket_ptr->close();
 	}
 
 	// read points from the server
-	void read(){
-		try{
-		pointCloud.clear();
-		std::string socket_get = "get\n";
-		if (isConnected) {
-			socket_ptr->write_some(
-					boost::asio::buffer(socket_get.c_str(), socket_get.size()));
-			size_t len_avail = socket_ptr->available(); // available buffer size
-			std::vector<char> data(socket_ptr->available());
-			boost::asio::read(*socket_ptr, boost::asio::buffer(data)); // read the buffer
-			std::istringstream is(std::string(data.begin(), data.end()));
-			std::string strLine;
-			std::getline(is, strLine);
-			int numOfPoints = atoi(strLine.c_str()); // number of points
-			// Read points
-			Point p;
-			boost::char_separator<char> delimiter(" ");
-			for (int i = 0; i < numOfPoints; ++i) {
+	void read() {
+		try {
+			pointCloud.clear();
+			std::string socket_get = "get\n";
+			if (isConnected) {
+				socket_ptr->write_some(
+						boost::asio::buffer(socket_get.c_str(),
+								socket_get.size()));
+				size_t len_avail = socket_ptr->available(); // available buffer size
+				std::vector<char> data(socket_ptr->available());
+				boost::asio::read(*socket_ptr, boost::asio::buffer(data)); // read the buffer
+				std::istringstream is(std::string(data.begin(), data.end()));
+				std::string strLine;
 				std::getline(is, strLine);
-				// Parse the string line
-				boost::tokenizer<boost::char_separator<char>> tok(strLine,
-						delimiter);
-				auto t = tok.begin();
-				if (t!=tok.end()){
+				int numOfPoints = atoi(strLine.c_str()); // number of points
+				// Read points
+				Point p;
+				boost::char_separator<char> delimiter(" ");
+				for (int i = 0; i < numOfPoints; ++i) {
+					std::getline(is, strLine);
+					// Parse the string line
+					boost::tokenizer<boost::char_separator<char>> tok(strLine,
+							delimiter);
+					auto t = tok.begin();
+					if (std::distance(t,tok.end())!= 3) // should have label,x and y, otherwise consider it bad data
+						continue;
 					p.label = boost::lexical_cast<int>(*t);
 					t++;
 					p.x = boost::lexical_cast<double>(*t);
@@ -96,13 +99,12 @@ public:
 					pointCloud.push_back(p);
 				}
 			}
-		}
-		}catch(std::exception& e){
-			std::cout<<e.what()<<std::endl;
+		} catch (std::exception& e) {
+			std::cout << e.what() << std::endl;
 		}
 	}
 
-	std::vector<Point>& getPointCloud(){
+	std::vector<Point>& getPointCloud() {
 		read();
 		return pointCloud;
 	}

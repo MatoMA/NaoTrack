@@ -45,13 +45,13 @@ static gboolean time_handler(GtkWidget *widget) {
 static void draw_point(cairo_t *cr, const Point& p){
 	double e = p.label * color_coeff / 255.0;
 	cairo_set_source_rgb(cr,
-			e,
-			1 - e,
-			e);
+			1-e,
+			0,
+			1-e);
 	// left handed
 //	cairo_arc(cr, p.x * cell_size_v, p.y * cell_size_h, 1, 0, 2 * M_PI);
 	// right handed
-	cairo_arc(cr, p.y * cell_size_h, p.x * cell_size_v, 1, 0, 2 * M_PI);
+	cairo_arc(cr, p.y * cell_size_h, p.x * cell_size_v, 4, 0, 2 * M_PI);
 	cairo_fill(cr);
 }
 
