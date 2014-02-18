@@ -13,18 +13,6 @@ FrameCapturer::FrameCapturer(string host, int port, string user, string password
     init();
 }
 
-//FrameCapturer::FrameCapturer(FrameCapturer& fc)
-    //:host(fc.getHost()), port(fc.getPort()), username(fc.getUsername()), password(fc.getPassword()), axis(fc.getHost(), fc.getPort()){
-
-    //LOG(INFO) << __PRETTY_FUNCTION__;
-    //LOG(INFO) << "host: " << host;
-    //LOG(INFO) << "port: " << port;
-    //LOG(INFO) << "username: " << username;
-    //LOG(INFO) << "password: " << password;
-
-    //init();
-//}
-
 FrameCapturer::~FrameCapturer()
 {
     LOG(INFO) << __PRETTY_FUNCTION__;
@@ -59,10 +47,6 @@ void FrameCapturer::setZoom(double zoom){
 
 ImageRGB FrameCapturer::getFrame(){
     LOG(INFO) << __PRETTY_FUNCTION__;
-    //TODO
-    //int width, height, depth;
-    //unsigned char *imgBytes = axis.getImageBytes(width, height, depth);
-    //mirage::img::Coordinate img_size(width, height);
 
     axis.getDefaultBMPImage();
     int dummy;
@@ -75,10 +59,8 @@ ImageRGB FrameCapturer::getFrame(){
 
 ImageRGB FrameCapturer::getFakeFrame(std::string filename) {
     LOG(INFO) << __PRETTY_FUNCTION__;
-    //if(fakeFrame == nullptr) {
     LOG(INFO) << "Init fakeFrame...";
     mirage::img::JPEG::read(fakeFrame, filename);
-    //}
     return fakeFrame;
 }
 

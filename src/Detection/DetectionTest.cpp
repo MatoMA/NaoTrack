@@ -41,24 +41,6 @@ int main(int argc, char* argv[]) {
         std::cout << i.first << std::endl;
         std::cout << i.second << std::endl;
     }
-
-    //fp.nextFakeFrame("fakeFrame2.jpg");
-    //fp.filterColor(40);
-    //fp.writeFrame("output2.jpg");
-    //pt = fp.findPositions();
-    //for (auto i : pt) {
-        //std::cout << "hoho" << std::endl;
-        //std::cout << i.first << std::endl;
-        //std::cout << i.second << std::endl;
-    //}
-
-    //double pan, tilt, zoom;
-    //fc.getPanTiltZoom(pan, tilt, zoom);
-    //std::cout << "pan:" << pan << std::endl;
-    //std::cout << "tilt:" << tilt << std::endl;
-    //std::cout << "zoom:" << zoom << std::endl;
-    //FrameProcessor * fp = new FrameProcessor();
-    //delete fp;
     return 0;
 }
 

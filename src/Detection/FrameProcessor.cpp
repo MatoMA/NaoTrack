@@ -79,7 +79,6 @@ std::vector<PanTiltCentered> FrameProcessor::findPositions() {
         u0 = size[0]/2;
         v0 = size[1]/2;
 
-        //greenPointCenters.clear();
         pantiltsCentered.clear();
 
         for (unsigned int i = 1; i<= labelizer.nb_labels; ++i) {
@@ -89,19 +88,15 @@ std::vector<PanTiltCentered> FrameProcessor::findPositions() {
             A = box.min();
             C = box.max();
 
+            //Filter box too small and calculate the center
             if (C[0] - A[0] > 3 && C[1] - A[1] > 3) {
                 u = (A[0] + C[0]) / 2.0;
                 v = (A[1] + C[1]) / 2.0;
-
-                //greenPointCenters.push_back(center);
 
                 LOG(INFO) << "Label: " << i;
                 LOG(INFO) << "Center_U: " << u;
                 LOG(INFO) << "Center_V: " << v;
 
-                //pan = 10.0132;
-                //tilt = -40.3937;
-                //zoom = 1998;
                 pantiltzoom(&panCentered,&tiltCentered,u,v,u0,v0,pan,tilt,zoom);
                 PanTiltCentered pantils(panCentered, tiltCentered);
                 pantiltsCentered.push_back(pantils);

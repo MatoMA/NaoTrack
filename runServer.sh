@@ -1,1 +1,1 @@
-bin/PositionServer/position_server 3000 20
+bin/PositionServer/position_server 3000 1

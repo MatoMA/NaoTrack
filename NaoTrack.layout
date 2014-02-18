@@ -1,50 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Detector" />
-	<File name="src/Detection/DetectionTest.cpp" open="0" top="0" tabpos="1">
-<<<<<<< HEAD
-		<Cursor position="895" topLine="0" />
+	<File name="src/Detection/DatabaseGenerator.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="881" topLine="35" />
 	</File>
-	<File name="src/Detection/Detector.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="1263" topLine="16" />
-=======
+	<File name="src/Detection/DetectionTest.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="src/Detection/Detector.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="1719" topLine="51" />
->>>>>>> temp
+	<File name="src/Detection/Detector.cpp" open="1" top="1" tabpos="0">
+		<Cursor position="527" topLine="18" />
 	</File>
 	<File name="src/Detection/FrameCapturer.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="0" topLine="0" />
+		<Cursor position="1711" topLine="65" />
 	</File>
 	<File name="src/Detection/FrameProcessor.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="0" topLine="0" />
+		<Cursor position="4341" topLine="104" />
 	</File>
 	<File name="src/Detection/FrameProcessor.h" open="0" top="0" tabpos="3">
 		<Cursor position="0" topLine="0" />
 	</File>
-<<<<<<< HEAD
-	<File name="src/Detection/SVMPredictor.cpp" open="1" top="0" tabpos="3">
-=======
 	<File name="src/Detection/SVMPredictor.cpp" open="0" top="0" tabpos="3">
->>>>>>> temp
 		<Cursor position="580" topLine="0" />
 	</File>
 	<File name="src/Detection/SVMPredictor.h" open="0" top="0" tabpos="3">
 		<Cursor position="108" topLine="0" />
 	</File>
-<<<<<<< HEAD
-	<File name="src/Detection/SVMPredictorTest.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="src/Position/Fakesource/fakesource.cpp" open="1" top="1" tabpos="4">
-		<Cursor position="422" topLine="17" />
-=======
-	<File name="src/Detection/SVMPredictorTest.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="src/Position/Fakesource/fakesource.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="1436" topLine="44" />
->>>>>>> temp
+	<File name="src/Detection/SVMPredictorTest.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="324" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

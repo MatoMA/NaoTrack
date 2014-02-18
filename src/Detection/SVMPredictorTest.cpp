@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
     //2 1:-33.64 2:-56.8166
     XY result;
     //result = p.predict(-33.64, -56.8166);
-    result = p.predict(-68.8722, -32.1822);
+    result = p.predict(14.0635, -28.8076);
     std::cout << "X: " << result.first << std::endl;
     std::cout << "Y: " << result.second << std::endl;
     return 0;
