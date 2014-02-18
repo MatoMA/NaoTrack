@@ -292,10 +292,13 @@ private:
 	PointPublisher pointPublisher;
 public:
 	Params params;
+	int xRange;
+	int yRange;
 	Analyser():g(),params(),distance(),
 			   unit_distance(distance),learn(),
 			   unit_learn(learn), evolution(params),
-			   input(),nbTicks(100){
+			   input(),nbTicks(100),
+			   xRange(10),yRange(10){
 	}
 
 	virtual ~Analyser(){
@@ -315,7 +318,7 @@ public:
 		int tick, e;
 		for (tick = 0, e = 0; tick < nbTicks; ++tick) {
 			// Let us acquire the input samples for that epoch.
-			input.samples = std::move(samplePointCloud(12,10,params.nbSamples(), pcl));
+			input.samples = std::move(samplePointCloud(xRange,yRange,params.nbSamples(), pcl));
 			for (int per_tick = 0; per_tick < 10; ++per_tick, ++e) {
 				std::random_shuffle(input.samples.begin(), input.samples.end());
 				vq2::algo::gngt::epoch(params, g, unit_distance, unit_learn,
