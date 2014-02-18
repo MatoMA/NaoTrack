@@ -1,7 +1,11 @@
 <config>
   <default_hostname>localhost</default_hostname>
-  <default_port>1024</default_port>
+  <default_port>1025</default_port>
   <cell_number_horizontal>12</cell_number_horizontal>
   <cell_number_vertical>12</cell_number_vertical>
   <color_coefficient>32.0</color_coefficient>
+  <input_server>localhost</input_server>
+  <input_server_port>1024</input_server_port>
+  <output_server>localhost</output_server>
+  <output_server_port>1025</output_server_port>
 </config>

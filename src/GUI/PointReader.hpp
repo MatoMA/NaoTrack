@@ -23,7 +23,6 @@ private:
 public:
 	PointReader() :
 			isConnected(false) {
-
 	}
 
 	virtual ~PointReader() {
@@ -88,7 +87,7 @@ public:
 					boost::tokenizer<boost::char_separator<char>> tok(strLine,
 							delimiter);
 					auto t = tok.begin();
-					if (std::distance(t,tok.end())!= 3) // should have label,x and y, otherwise consider it bad data
+					if (std::distance(t,tok.end())!= 3) // should have label, x and y, otherwise consider it bad data
 						continue;
 					p.label = boost::lexical_cast<int>(*t);
 					t++;

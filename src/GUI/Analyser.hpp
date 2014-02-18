@@ -66,7 +66,7 @@ typedef vq2::unit::XfigConverter<Unit, FigConverter> UnitFigConverter;
 // This controls the accuracy of the input sampling. THIS IS NOT THE
 // NUMBER OF INPUTS (see further).
 #define NB_SAMPLES 20000
-#define TARGET      6.7e-5
+#define TARGET      1e-4
 #define NT          (TARGET*NB_SAMPLES)
 
 // This is the parameter set for GNG-T and evolution
@@ -315,7 +315,7 @@ public:
 		int tick, e;
 		for (tick = 0, e = 0; tick < nbTicks; ++tick) {
 			// Let us acquire the input samples for that epoch.
-			input.samples = std::move(samplePointCloud(12,10,20000, pcl));
+			input.samples = std::move(samplePointCloud(12,10,params.nbSamples(), pcl));
 			for (int per_tick = 0; per_tick < 10; ++per_tick, ++e) {
 				std::random_shuffle(input.samples.begin(), input.samples.end());
 				vq2::algo::gngt::epoch(params, g, unit_distance, unit_learn,
