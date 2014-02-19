@@ -16,7 +16,19 @@
     gedit src/GUI/config.xml (optional)
 
 # How to run
-    bash runServer.sh
-    bash runDetector.sh
-    bash runAnalyser.sh
-    bash runGUI.sh
+
+## Position server:
+    bash runServer1.sh
+    bash runServer2.sh
+
+## Detector:
+    cd bin/Detector
+    ./detector
+
+## Analyser
+    cd src/GUI
+    ./Analyser
+
+## GUI
+    cd src/GUI
+    ./position_viewer
