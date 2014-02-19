@@ -1,16 +1,8 @@
 #include <string>
-#include <glog/logging.h>
 #include "FrameCapturer.h"
 #include "FrameProcessor.h"
 
-void loggerInit(char* argv0) {
-    google::InitGoogleLogging(argv0);
-    FLAGS_logtostderr = 1;
-    FLAGS_minloglevel = 2;
-}
-
 int main(int argc, char* argv[]) {
-    loggerInit(argv[0]);
 
     //std::string host("ptz1.grid.metz.supelec.fr");
     //int port = 80;

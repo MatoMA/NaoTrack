@@ -1,7 +1,6 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <glog/logging.h>
 #include <ctime>
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
@@ -13,15 +12,7 @@ typedef std::pair<double, double> PanTilt; // (pan, tilt)
 typedef std::pair<double,double>  Point;  // (x,y)
 typedef std::pair<int,Point>      Data;   // (label, P)
 
-void loggerInit(char* argv0) {
-    google::InitGoogleLogging(argv0);
-    FLAGS_logtostderr = 1;
-    FLAGS_minloglevel = 2;
-}
-
 int main(int argc, char* argv[]) {
-    //Logger setting
-    loggerInit(argv[0]);
 
     //Init
     FrameCapturer fc("192.168.50.81",80,"demo","demo");
