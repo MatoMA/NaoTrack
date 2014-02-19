@@ -1,5 +1,4 @@
 #include <math.h>
-#include <glog/logging.h>
 #include "FrameCapturer.h"
 #include "FrameProcessor.h"
 
@@ -8,35 +7,27 @@ FrameProcessor::FrameProcessor(FrameCapturer& fc)
     //:frameCapturer(&fc), frame_in(fc.getFakeFrame("fakeFrame.jpg")), pantiltsCentered()
     :frameCapturer(&fc), frame_in(fc.getFrame()), pantiltsCentered()
 {
-    LOG(INFO) << __PRETTY_FUNCTION__;
     frameCapturer->getPanTiltZoom(pan, tilt, zoom);
 }
 
-FrameProcessor::~FrameProcessor()
-{
-    LOG(INFO) << __PRETTY_FUNCTION__;
-}
+FrameProcessor::~FrameProcessor() { }
 
 void FrameProcessor::nextFrame() {
-    LOG(INFO) << __PRETTY_FUNCTION__;
     frameCapturer->getPanTiltZoom(pan, tilt, zoom);
     frame_in = frameCapturer->getFrame();
 }
 
 void FrameProcessor::nextFakeFrame(std::string filename) {
-    LOG(INFO) << __PRETTY_FUNCTION__;
     //TODO Bug potential of frame buffer copy operation
     frame_in = frameCapturer->getFakeFrame(filename);
     //frameCapturer->getPanTiltZoom(pan, tilt, zoom);
 }
 
 void FrameProcessor::writeFrame(std::string filename) {
-    LOG(INFO) << __PRETTY_FUNCTION__;
     mirage::img::JPEG::write(frame_in, filename, 70);
 }
 
 void FrameProcessor::filterColor(int threshold) {
-    LOG(INFO) << __PRETTY_FUNCTION__;
     try{
         ImageRGB::pixel_type p,p_end;
         ImageRGB::value_type black(0,0,0);
@@ -58,23 +49,19 @@ void FrameProcessor::filterColor(int threshold) {
         }
     }
     catch(mirage::Exception::Any& e) {
-        LOG(ERROR) << "Error : " <<  e.what();
+        std::cout << "Error : " <<  e.what() << std::endl;
     }
     catch(...) {
-        LOG(ERROR) << "Unknown error";
+        std::cout << "Unknown error" << std::endl;
     }
 }
 
 std::vector<PanTiltCentered> FrameProcessor::findPositions() {
-    LOG(INFO) << __PRETTY_FUNCTION__;
     try {
         labelizer.neighborhoodSurround(); // 8 neighbors considered
         labelizer(frame_in);
 
         mirage::img::Coordinate size = frame_in._dimension;
-        LOG(INFO) << "Nb_labels: " << labelizer.nb_labels;
-        LOG(INFO) << "Frame Width: " << size[0];
-        LOG(INFO) << "Frame Height: " << size[1];
         double u0,v0,u,v,panCentered,tiltCentered;
         u0 = size[0]/2;
         v0 = size[1]/2;
@@ -93,23 +80,17 @@ std::vector<PanTiltCentered> FrameProcessor::findPositions() {
                 u = (A[0] + C[0]) / 2.0;
                 v = (A[1] + C[1]) / 2.0;
 
-                LOG(INFO) << "Label: " << i;
-                LOG(INFO) << "Center_U: " << u;
-                LOG(INFO) << "Center_V: " << v;
-
                 pantiltzoom(&panCentered,&tiltCentered,u,v,u0,v0,pan,tilt,zoom);
                 PanTiltCentered pantils(panCentered, tiltCentered);
                 pantiltsCentered.push_back(pantils);
-                LOG(INFO) << "PanCentered: " << panCentered;
-                LOG(INFO) << "TiltCentered: " << tiltCentered;
             }
         }
     }
     catch(mirage::Exception::Any& e) {
-        LOG(ERROR) << "Error : " <<  e.what();
+        std::cout << "Error : " <<  e.what() << std::endl;
     }
     catch(...) {
-        LOG(ERROR) << "Unknown error";
+        std::cout << "Unknown error" << std::endl;
     }
 
     return pantiltsCentered;

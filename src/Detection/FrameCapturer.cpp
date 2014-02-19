@@ -1,52 +1,32 @@
-#include <glog/logging.h>
 #include "FrameCapturer.h"
 
 FrameCapturer::FrameCapturer(string host, int port, string user, string password)
     :host(host), port(port), username(user), password(password), axis(host, port)
 {
-    LOG(INFO) << __PRETTY_FUNCTION__;
-    LOG(INFO) << "host: " << host;
-    LOG(INFO) << "port: " << port;
-    LOG(INFO) << "username: " << user;
-    LOG(INFO) << "password: " << password;
-
     init();
 }
 
 FrameCapturer::~FrameCapturer()
 {
-    LOG(INFO) << __PRETTY_FUNCTION__;
     axis.end();
 }
 
 void FrameCapturer::getPanTiltZoom(double &pan, double &tilt, double &zoom){
-    LOG(INFO) << __PRETTY_FUNCTION__;
     axis.getPosition(pan, tilt, zoom);
-    LOG(INFO) << "Pan: " << pan;
-    LOG(INFO) << "Tilt: " << tilt;
-    LOG(INFO) << "Zoom: " << zoom;
 }
 
 void FrameCapturer::setPanTilt(double &pan, double &tilt) {
-    LOG(INFO) << __PRETTY_FUNCTION__;
-    LOG(INFO) << "Pan: " << pan;
-    LOG(INFO) << "Tilt: " << tilt;
-
     axis.setPanTilt(pan, tilt);
     axis.wait();
 }
 
 void FrameCapturer::setZoom(double zoom){
-    LOG(INFO) << __PRETTY_FUNCTION__;
-    LOG(INFO) << "Zoom: " << zoom;
-
     axis.setZoom(zoom);
     axis.wait();
     ost::Thread::sleep(2000);
 }
 
 ImageRGB FrameCapturer::getFrame(){
-    LOG(INFO) << __PRETTY_FUNCTION__;
 
     axis.getDefaultBMPImage();
     int dummy;
@@ -58,20 +38,16 @@ ImageRGB FrameCapturer::getFrame(){
 }
 
 ImageRGB FrameCapturer::getFakeFrame(std::string filename) {
-    LOG(INFO) << __PRETTY_FUNCTION__;
-    LOG(INFO) << "Init fakeFrame...";
     mirage::img::JPEG::read(fakeFrame, filename);
     return fakeFrame;
 }
 
 void FrameCapturer::init() {
-    LOG(INFO) << __PRETTY_FUNCTION__;
-    LOG(INFO) << "Init axis connection...";
 
     if(!axis.connect(username, password)){
-        LOG(FATAL) << "Can't connect " << username
+        std::cout << "Can't connect " << username
 	      << " (" << password << ") on "
-	      << host << ':' << port << ". Aborting.";
+	      << host << ':' << port << ". Aborting." << std::endl;
     }
 
     //TODO  No verifications of these two settings

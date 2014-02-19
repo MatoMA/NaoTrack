@@ -3,21 +3,13 @@
 #include <fstream>
 #include <boost/filesystem.hpp>
 #include <boost/foreach.hpp>
-#include <glog/logging.h>
 #include "FrameCapturer.h"
 #include "FrameProcessor.h"
 
 using namespace std;
 using namespace boost::filesystem;
 
-void loggerInit(char* argv0) {
-    google::InitGoogleLogging(argv0);
-    FLAGS_logtostderr = 1;
-    FLAGS_minloglevel = 1;
-}
-
 int main(int argc, char* argv[]) {
-    loggerInit(argv[0]);
 
     FrameCapturer fc("192.168.50.81",80,"demo","demo");
     fc.setZoom(2000);
