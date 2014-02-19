@@ -11,8 +11,9 @@
     cmake .
     make
 
-# Setting for Detector
+# Settings 
     bash detectorSetting.sh
+    gedit src/GUI/config.xml (optional)
 
 # How to run
     bash runServer.sh
